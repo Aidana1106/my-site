@@ -1,5 +1,6 @@
 let currentPage = 1;
 const totalPages = 3;
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
@@ -97,27 +98,39 @@ function restart() {
 // Поддержка свайпов на мобильных устройствах
 let touchStartX = 0;
 let touchEndX = 0;
+let touchStartY = 0;
+let touchEndY = 0;
 
 document.addEventListener('touchstart', function(e) {
     touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
 }, false);
 
 document.addEventListener('touchend', function(e) {
     touchEndX = e.changedTouches[0].screenX;
+    touchEndY = e.changedTouches[0].screenY;
     handleSwipe();
 }, false);
 
 function handleSwipe() {
-    const swipeThreshold = 50; // Минимальное расстояние для свайпа
+    const swipeThreshold = 80; // Минимальное расстояние для свайпа по горизонтали
+    const verticalThreshold = 60; // Допустимое вертикальное смещение
+
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = touchEndY - touchStartY;
+
+    // Игнорируем свайп, если движение в основном вертикальное или слишком короткое
+    if (Math.abs(deltaX) < swipeThreshold) return;
+    if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > verticalThreshold) return;
     
-    if (touchEndX < touchStartX - swipeThreshold) {
+    if (deltaX < 0) {
         // Свайп влево - следующая страница
         if (currentPage < totalPages) {
             nextPage();
         }
     }
     
-    if (touchEndX > touchStartX + swipeThreshold) {
+    if (deltaX > 0) {
         // Свайп вправо - предыдущая страница
         if (currentPage > 1) {
             prevPage();
@@ -154,6 +167,8 @@ let lastMoveTime = 0;
 const moveCooldown = 100; // Минимальная задержка между перемещениями (мс)
 
 function moveButton(e) {
+    if (isTouchDevice) return;
+
     const btn = document.getElementById('btnNo');
     if (!btn || !btn.closest('.page.active')) return;
     
