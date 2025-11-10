@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> С Днем Рождения! </title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="page active" id="page1">
+            <div class="content">
+                <h2>Ты готов?</h2>
+                <p class="ready-message">Готов увидеть сюрприз?</p>
+                <p class="try-hint">Попробуй нажми "Нет"</p>
+                <div class="buttons-container">
+                    <button class="btn-yes" onclick="handleYesClick()">Уееес</button>
+                    <button class="btn-no" id="btnNo" onclick="handleNoClick()">Ноуу</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="page" id="page2">
+            <div class="content">
+                <h2>Кьеет</h2>
+                <p class="gallery-intro">Нет норм фотографий╰（‵□′）╯</p>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="images/gallery-1.jpg" alt="">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/gallery-2.jpg" alt="">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/gallery-3.jpg" alt="">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/gallery-4.jpg" alt="">
+                    </div>
+                </div>
+                <button class="btn-next" onclick="nextPage()">Далее →</button>
+            </div>
+        </div>
+
+        <div class="page" id="page3">
+            <div class="content letter-content">
+                <div class="letter">
+                    <div class="letter-header">
+                        <h2>Письмо for you</h2>
+                    </div>
+                    <div class="letter-body">
+                        <p class="letter-greeting">My dear Dream,</p>
+                        <p class="letter-text">
+                        поздравляю тебя с твоим праздником! <br>
+						Сказать хочу многое, но не могу донести словами						
+   
+                        </p>
+                        <p class="letter-text">
+                            Конечно, я желаю тебе всего самого лучшего,
+в особенности — быть таким же открытым, добрым человеком <br>
+Также хочется сказать, что я рада, что познакомилась с тобой<br>
+Временами думаю: как так всё получилось?<br>
+В Мак я пришла с мыслью: главное - ни с кем не заобщаться, ведь я ненадолго<br>
+Но получилось как получилось - и я не жалею
+<p class="letter-text">
+Я надеюсь, впереди у нас есть будущее, и оно будет счастливым <br>
+Но, как говорится, поживём - увидим.
+Хотела бы я тебя видеть каждый день вживую,
+но я благодарна тому, что имею</p>
+<p class="letter-text">
+Пусть этот год, да и в целом все остальные года,<br>
+пройдут так, как ты мечтаешь<br>
+
+                        </p>
+                        <p class="letter-text">
+                            Соответствуй своему имени — всё-таки)
+                        </p>
+                        <p class="letter-signature">Айдана</p>
+                    </div>
+                </div>
+                <button class="btn-next" onclick="restart()">Начать заново 🔄</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-indicator">
+        <span id="currentPage">1</span> / <span id="totalPages">3</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
